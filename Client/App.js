@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Camera from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 
 export default function App() {
