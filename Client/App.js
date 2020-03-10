@@ -1,7 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View, StatusBar, SafeAreaView } from 'react-native';
 import Camera from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
+import { Constants } from 'expo'
+
 
 export default function App() {
 
@@ -32,15 +34,41 @@ export default function App() {
     );
   }
 
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity
-          onPress={openImagePickerAsync}
-          style={{ backgroundColor: 'blue' }}>
+  //Method to open camera using System's built in camera
+  let openCameraAsync = async () => {
+    let result = await ImagePicker.requestCameraPermissionsAsync();
+    if(result.granted === false){
+      alert('Could not get camera permission!');
+      return;
+    }
 
-        <Text style={{ fontSize: 20, color: '#fff' }}>Pick a photo</Text>
-      </TouchableOpacity>
-    </View>
+    ImagePicker.launchCameraAsync();
+
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+
+      {/* Image Picker Button */}
+      <View style={styles.topLeftContainer}>
+        <TouchableOpacity onPress={openImagePickerAsync}>
+          <Image source={require('./menu_icon.png')} style={styles.icon }></Image>
+
+          <Text style={{ fontSize: 20, color: 'black', alignSelf: 'center'}}>Pick a photo</Text>
+        </TouchableOpacity>
+
+      </View>
+
+      {/* Camera Button */}
+      <View>
+        <TouchableOpacity onPress={openCameraAsync}>
+          <Image 
+            source={require('./camera_icon.png')}
+            style={{alignSelf: 'center', width: 100, height: 100, marginBottom: 10}}>
+          </Image>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
     
   );
 }
@@ -49,9 +77,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    //alignItems: 'center',
     justifyContent: 'center',
   },
+  topLeftContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    top: 10,
+    left: 10,
+    marginTop: Expo.Constants.statusBarHeight,
+  },
+  icon: {
+    height: 48,
+    width: 32,
+    maxHeight: '50%',
+    maxWidth: '35%',
+
+  },
+
   logo: {
     width: 305,
     height: 159,

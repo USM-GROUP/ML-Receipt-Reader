@@ -12,3 +12,6 @@ web-report/
 
 # macOS
 .DS_Store
+
+# Private Keys
+Client/ReceiptParser-c49349c83627.json
