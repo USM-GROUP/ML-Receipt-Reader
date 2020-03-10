@@ -1,8 +1,10 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, StatusBar, SafeAreaView } from 'react-native';
 import Camera from 'expo-camera';
+//import CameraClass from './Camera'
 import * as ImagePicker from 'expo-image-picker';
 import { Constants } from 'expo'
+import {Button} from 'react-native-elements'
 
 
 export default function App() {
@@ -36,22 +38,27 @@ export default function App() {
 
   //Method to open camera using System's built in camera
   let openCameraAsync = async () => {
-    let result = await ImagePicker.requestCameraPermissionsAsync();
-    if(result.granted === false){
+    let permission = await ImagePicker.requestCameraPermissionsAsync();
+    if(permission.granted === false){
       alert('Could not get camera permission!');
       return;
     }
 
-    ImagePicker.launchCameraAsync();
+    let result = ImagePicker.launchCameraAsync({
+      allowsEditing: true
+    });
+
+    if(result.cancelled === true){
+      return;
+    }
 
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-
+    <SafeAreaView style={{flex: 1, flexDirection: 'column', backgroundColor: 'green', justifyContent: 'space-between'}}>
       {/* Image Picker Button */}
       <View style={styles.topLeftContainer}>
-        <TouchableOpacity onPress={openImagePickerAsync}>
+        <TouchableOpacity onPress={openImagePickerAsync} style={{top: 10, left: 10}}>
           <Image source={require('./menu_icon.png')} style={styles.icon }></Image>
 
           <Text style={{ fontSize: 20, color: 'black', alignSelf: 'center'}}>Pick a photo</Text>
@@ -59,8 +66,14 @@ export default function App() {
 
       </View>
 
+      {/* Wrapping this image in a view would result in unwarranted behavior */}
+      <Image style={{flex: 3, backgroundColor: 'yellow', flexWrap: 'wrap', alignSelf: 'center'}}
+        source={require('./mockup1.jpg')}
+        resizeMode='contain'>
+      </Image>
+
       {/* Camera Button */}
-      <View>
+      <View style={{flex: 1, backgroundColor: 'blue', flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center'}}>
         <TouchableOpacity onPress={openCameraAsync}>
           <Image 
             source={require('./camera_icon.png')}
@@ -68,6 +81,8 @@ export default function App() {
           </Image>
         </TouchableOpacity>
       </View>
+      <View style={{backgroundColor: 'red', flex: 1/2}}></View>
+
     </SafeAreaView>
     
   );
@@ -82,10 +97,9 @@ const styles = StyleSheet.create({
   },
   topLeftContainer: {
     flex: 1,
+    backgroundColor: 'purple',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    top: 10,
-    left: 10,
     marginTop: Expo.Constants.statusBarHeight,
   },
   icon: {
