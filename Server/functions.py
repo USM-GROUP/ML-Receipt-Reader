@@ -14,15 +14,21 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
-    print('Texts:')
+    """print('Texts:')"""
 
     for text in texts:
-        print('\n"{}"'.format(text.description))
+        """print('\n"{}"'.format(text.description))"""
+        f = open("./receipts/receipt_text.txt", "a")
+        f.write('{}\n'.format(text.description))
+        f.close()
 
         vertices = (['({},{})'.format(vertex.x, vertex.y)
                     for vertex in text.bounding_poly.vertices])
 
-        print('bounds: {}'.format(','.join(vertices)))
+        """print('bounds: {}'.format(','.join(vertices)))"""
+        f = open("./bounds/receipt_bounds.txt", "a")
+        f.write('{} bounds: {}\n'.format(text.description, ','.join(vertices)))
+        f.close()
 
     if response.error.message:
         raise Exception(
