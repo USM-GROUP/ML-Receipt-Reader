@@ -24,17 +24,17 @@ export default function App() {
       return;
     }
 
-    setSelectedImage({ localUri: pickerResult.uri });
+    //Returns {uri, type, width, height}
+    setSelectedImage(pickerResult);
 
   };
 
-  if (selectedImage !== null) {
+  /*if (selectedImage !== null) {
     return (
       <View style={styles.container}>
         <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
       </View>
-    );
-  }
+    );*/
 
   //Method to open camera using System's built in camera
   let openCameraAsync = async () => {
@@ -45,14 +45,58 @@ export default function App() {
     }
 
     let result = ImagePicker.launchCameraAsync({
-      allowsEditing: true
     });
 
     if(result.cancelled === true){
       return;
     }
 
+    setSelectedImage(result);
+    handleUploadPhoto();
+
   }
+
+  const packagePhoto = (photo, body) => {
+    const data = new FormData();
+    let randId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    let fileExt = photo.uri.substr(photo.uri.lastIndexOf('.') + 1);
+
+  
+    data.append("photo", {
+      name: `${randId}.${fileExt}`,
+      type: `image/${fileExt}`,
+      uri: photo.uri,
+        //Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
+    });
+  
+    Object.keys(body).forEach(key => {
+      data.append(key, body[key]);
+    });
+  
+    return data;
+  };
+
+
+const handleUploadPhoto = () => {
+  //Generate uuid for image here
+  fetch("http://10.0.0.108:8080/upload", {
+    method: "POST",
+    body: packagePhoto(selectedImage, { userId: "1023", uuid: "71591" }),
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+    .then(response => response.json())
+    .then(response => {
+      console.log("upload success, response:", response);
+      alert("Upload success!");
+    })
+    .catch(error => {
+      console.log("upload error", error);
+      alert("Upload failed!");
+    });
+};
 
   return (
     <SafeAreaView style={{flex: 1, flexDirection: 'column', backgroundColor: 'green', justifyContent: 'space-between'}}>
@@ -71,6 +115,8 @@ export default function App() {
         source={require('./mockup1.jpg')}
         resizeMode='contain'>
       </Image>
+
+      <Button title="Upload" onPress={handleUploadPhoto} />
 
       {/* Camera Button */}
       <View style={{flex: 1, backgroundColor: 'blue', flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center'}}>
