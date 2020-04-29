@@ -1,80 +1,79 @@
-import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Camera from 'expo-camera';
-import * as ImagePicker from 'expo-image-picker';
+import React from "react";
+import { Image } from "react-native";
+import { AppLoading } from "expo";
+import { Asset } from "expo-asset";
+import { Block, GalioProvider } from "galio-framework";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
+// Before rendering any navigation stack
+import { enableScreens } from "react-native-screens";
+enableScreens();
 
-  let [selectedImage, setSelectedImage] = React.useState(null);
+import Screens from "./navigation/Screens";
+import { Images, articles, argonTheme } from "./constants";
 
-  let openImagePickerAsync = async () => {
-    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+// cache app images
+const assetImages = [
+  Images.Onboarding,
+  Images.LogoOnboarding,
+  Images.Logo,
+  Images.Pro,
+  Images.ArgonLogo,
+  Images.iOSLogo,
+  Images.androidLogo
+];
 
-    if (permissionResult.granted === false) {
-      alert('Permission to access camera roll is required!');
-      return;
+// cache product images
+articles.map(article => assetImages.push(article.image));
+
+function cacheImages(images) {
+  return images.map(image => {
+    if (typeof image === "string") {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
     }
-
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    if (pickerResult.cancelled === true) {
-      return;
-    }
-
-    setSelectedImage({ localUri: pickerResult.uri });
-
-  };
-
-  if (selectedImage !== null) {
-    return (
-      <View style={styles.container}>
-        <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
-      </View>
-    );
-  }
-
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity
-          onPress={openImagePickerAsync}
-          style={{ backgroundColor: 'blue' }}>
-
-        <Text style={{ fontSize: 20, color: '#fff' }}>Pick a photo</Text>
-      </TouchableOpacity>
-    </View>
-    
-  );
+  });
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logo: {
-    width: 305,
-    height: 159,
-    marginBottom: 20,
-  },
-  instructions: {
-    color: '#888',
-    fontSize: 18,
-    marginHorizontal: 15,
-    marginBottom: 10,
-  },
-  button: {
-    backgroundColor: 'blue',
-    padding: 20,
-    borderRadius: 5,
-  },
-  buttonText: {
-    fontSize: 20,
-    color: '#fff',
-  },
-  thumbnail: {
-    width: 300,
-    height: 300,
-    resizeMode: 'contain',
-  },
-});
+export default class App extends React.Component {
+  state = {
+    isLoadingComplete: false
+  };
+
+  render() {
+    if (!this.state.isLoadingComplete) {
+      return (
+        <AppLoading
+          startAsync={this._loadResourcesAsync}
+          onError={this._handleLoadingError}
+          onFinish={this._handleFinishLoading}
+        />
+      );
+    } else {
+      return (
+        <NavigationContainer>
+          <GalioProvider theme={argonTheme}>
+            <Block flex>
+              <Screens />
+            </Block>
+          </GalioProvider>
+        </NavigationContainer>
+      );
+    }
+  }
+
+  _loadResourcesAsync = async () => {
+    return Promise.all([...cacheImages(assetImages)]);
+  };
+
+  _handleLoadingError = error => {
+    // In this case, you might want to report the error to your error
+    // reporting service, for example Sentry
+    console.warn(error);
+  };
+
+  _handleFinishLoading = () => {
+    this.setState({ isLoadingComplete: true });
+  };
+}
