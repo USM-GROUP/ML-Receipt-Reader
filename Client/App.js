@@ -11,6 +11,16 @@ export default function App() {
 
   let [selectedImage, setSelectedImage] = React.useState(null);
 
+  React.useEffect(
+    () => {
+      if(selectedImage != null){
+        console.log("Uploading image...");
+        handleUploadPhoto();
+      }
+    },
+    [selectedImage]
+  )
+
   let openImagePickerAsync = async () => {
     let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
 
@@ -44,15 +54,17 @@ export default function App() {
       return;
     }
 
-    let result = ImagePicker.launchCameraAsync({
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true
     });
 
     if(result.cancelled === true){
+      console.log("CANCELLED")
       return;
     }
 
-    setSelectedImage(result);
-    handleUploadPhoto();
+    setSelectedImage(result)
+    //handleUploadPhoto();
 
   }
 
@@ -79,7 +91,9 @@ export default function App() {
 
 const handleUploadPhoto = () => {
   //Generate uuid for image here
-  fetch("http://10.0.0.108:8080/upload", {
+  //url = "http://solariasoft.com/upload"
+  url = "http://192.168.0.23:8080/upload"
+  fetch(url, {
     method: "POST",
     body: packagePhoto(selectedImage, { userId: "1023", uuid: "71591" }),
     headers: {
@@ -87,7 +101,7 @@ const handleUploadPhoto = () => {
       'Content-Type': 'multipart/form-data',
     },
   })
-    .then(response => response.json())
+    .then(response => JSON.stringify(response))
     .then(response => {
       console.log("upload success, response:", response);
       alert("Upload success!");
