@@ -1,7 +1,7 @@
 export default {
   COLORS: {
     DEFAULT: '#172B4D',
-    PRIMARY: '#5E72E4',
+    PRIMARY: '#1DC645',
     SECONDARY: '#F7FAFC',
     LABEL: '#FE2472',
     INFO: '#11CDEF',
@@ -13,7 +13,7 @@ export default {
     INPUT: '#DCDCDC',
     INPUT_SUCCESS: '#7BDEB2',
     INPUT_ERROR: '#FCB3A4',
-    ACTIVE: '#5E72E4', //same as primary
+        ACTIVE: '#1DC645', //same as primary
     BUTTON_COLOR: '#9C26B0', //wtf
     PLACEHOLDER: '#9FA5AA',
     SWITCH_ON: '#5E72E4',

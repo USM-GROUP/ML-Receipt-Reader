@@ -25,10 +25,10 @@ class DrawerItem extends React.Component {
             name="map-big"
             family="ArgonExtra"
             size={14}
-            color={focused ? "white" : argonTheme.COLORS.ERROR}
+            color={focused ? "white" : argonTheme.COLORS.PRIMARY}
           />
         );
-      case "Articles":
+      case "Receipts":
         return (
           <Icon
             name="spaceship"
@@ -43,7 +43,7 @@ class DrawerItem extends React.Component {
             name="chart-pie-35"
             family="ArgonExtra"
             size={14}
-            color={focused ? "white" : argonTheme.COLORS.WARNING}
+            color={focused ? "white" : argonTheme.COLORS.PRIMARY}
           />
         );
       case "Account":
@@ -52,16 +52,9 @@ class DrawerItem extends React.Component {
             name="calendar-date"
             family="ArgonExtra"
             size={14}
-            color={focused ? "white" : argonTheme.COLORS.INFO}
+            color={focused ? "white" : argonTheme.COLORS.PRIMARY}
           />
         );
-      case "Getting Started":
-        return (<Icon
-          name="spaceship"
-          family="ArgonExtra"
-          size={14}
-          color={focused ? "white" : "rgba(0,0,0,0.5)"}
-        />);
       case "Log out":
         return <Icon />;
       default:
@@ -78,16 +71,7 @@ class DrawerItem extends React.Component {
     ];
 
     return (
-      <TouchableOpacity
-        style={{ height: 60 }}
-        onPress={() =>
-          title == "Getting Started"
-            ? Linking.openURL(
-                "https://demos.creative-tim.com/argon-pro-react-native/docs/"
-              ).catch(err => console.error("An error occurred", err))
-            : navigation.navigate(title)
-        }
-      >
+      
         <Block flex row style={containerStyles}>
           <Block middle flex={0.1} style={{ marginRight: 5 }}>
             {this.renderIcon()}
@@ -102,7 +86,7 @@ class DrawerItem extends React.Component {
             </Text>
           </Block>
         </Block>
-      </TouchableOpacity>
+      
     );
   }
 }

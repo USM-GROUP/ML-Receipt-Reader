@@ -1,10 +1,10 @@
 import argonTheme from './Theme';
-import articles from './articles';
+import receipts from './receipts';
 import Images from './Images';
 import tabs from './tabs';
 
 export {
-  articles, 
+  receipts, 
   argonTheme,
   Images,
   tabs

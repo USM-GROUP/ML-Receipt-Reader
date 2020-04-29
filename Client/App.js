@@ -10,7 +10,7 @@ import { enableScreens } from "react-native-screens";
 enableScreens();
 
 import Screens from "./navigation/Screens";
-import { Images, articles, argonTheme } from "./constants";
+import { Images, receipts, argonTheme } from "./constants";
 
 // cache app images
 const assetImages = [
@@ -20,11 +20,16 @@ const assetImages = [
   Images.Pro,
   Images.ArgonLogo,
   Images.iOSLogo,
-  Images.androidLogo
+    Images.androidLogo,
+    Images.receipt1,
+    Images.receipt2,
+    Images.receipt3,
+    Images.receipt4,
+  Images.receipt5
 ];
 
 // cache product images
-articles.map(article => assetImages.push(article.image));
+receipts.map(receipts => assetImages.push(receipts.image));
 
 function cacheImages(images) {
   return images.map(image => {
@@ -68,8 +73,7 @@ export default class App extends React.Component {
   };
 
   _handleLoadingError = error => {
-    // In this case, you might want to report the error to your error
-    // reporting service, for example Sentry
+    // I read we might want to output this to an error handling service
     console.warn(error);
   };
 
