@@ -26,10 +26,15 @@ def is_on_line(point_a, point_b, slope):
     # print(slope*(point_b.get_x()-point_a.get_x()) + point_a.get_y())
 
     try:
-        if point_b.get_y() == (slope * (point_b.get_x()-point_a.get_x()) + point_a.get_y()):
+        value = (slope * (point_b.get_x()-point_a.get_x()) + point_a.get_y())
+        print("point: ",point_b.get_y()," value: ",value)
+        if point_b.get_y() < value +10 and point_b.get_y() > value -10:
             print("the points are on the line")
+            return True
         else:
-            raise error.not_on_line
+            print("the points are not on the line")
+            return False
+            #raise error.not_on_line
 
     except Exception as err:
         print(err)

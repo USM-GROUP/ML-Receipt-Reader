@@ -25,3 +25,9 @@ class point:
 
     def get_y(self):
         return self.y
+
+    def __str__(self):
+        return "("+str(self.x)+","+str(self.y)+")"
+
+    def __repr__(self):
+        return "("+str(self.x)+","+str(self.y)+")"
