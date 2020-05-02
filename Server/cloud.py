@@ -65,7 +65,7 @@ def findItem(lines):
 
 def processImage(imagePath, filename):
     client = vision.ImageAnnotatorClient()
-    file = os.path.abspath('resources/test.jpg')
+    file = os.path.abspath(imagePath)
 
     with io.open(file, 'rb') as imagefile:
         content = imagefile.read()
