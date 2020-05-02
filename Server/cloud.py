@@ -4,8 +4,8 @@ import json
 import re
 from google.cloud import vision
 from google.cloud.vision import types
-
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./config/vision_config.json"
+
 
 def clean(arr):
     while '' in arr:
@@ -85,4 +85,3 @@ def processImage(imagePath, filename):
 
     with io.open('./responses/items_' + filename +'.txt','w') as out:
         print(items)
-
