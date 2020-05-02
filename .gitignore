@@ -9,7 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
-Server/vision_config.json
+Server/config/vision_config.json
 
 # macOS
 .DS_Store
