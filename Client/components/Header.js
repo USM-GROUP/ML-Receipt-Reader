@@ -37,8 +37,8 @@ class Header extends React.Component {
         style={styles.search}
         placeholder="What are you looking for?"
         placeholderTextColor={'#8898AA'}
-        onFocus={() => navigation.navigate('Pro')}
-        iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
+        onFocus={() => navigation.navigate('#########')}
+        iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="filter" family="ArgonExtra" />}
       />
     );
   }
@@ -49,14 +49,14 @@ class Header extends React.Component {
       <Block row style={styles.options}>
         <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Camera')}>
           <Block row middle>
-            <Icon name="ic_photo_camera_48px" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON} />
+            <Icon size={16} name="camera" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON} />
             <Text size={16} style={styles.tabTitle}>{optionLeft || 'Camera'}</Text>
             
           </Block>
         </Button>
         <Button shadowless style={styles.tab} onPress={() => navigation.navigate('Upload')}>
           <Block row middle>
-            <Icon size={16} name="ic_photo_library_48px" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
+            <Icon size={16} name="images" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
             <Text size={16} style={styles.tabTitle}>{optionRight || 'Upload Picture'}</Text>
           </Block>
         </Button>

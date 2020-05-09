@@ -23,8 +23,9 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
       style={styles.container}
       forceInset={{ top: 'always', horizontal: 'never' }}
     >
-          <Block center>
+          <Block center style={{paddingTop: 20, paddingRight: 60}}>
               <Image style={{
+                  
                   width: 275,
                   height: 100
               }}

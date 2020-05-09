@@ -28,14 +28,14 @@ class Onboarding extends React.Component {
                 
                     
             </Block>
-            <Block center>
-                <Image source={Images.LogoOnboarding} />
+            <Block center >
+                <Image source={Images.LogoOnboarding} style={{ width: 600, paddingTop: 100 }} />
                 </Block>
         <Block flex space="between" style={styles.padded}>
             <Block flex space="around" style={{ zIndex: 2 }}>
               <Block style={styles.logo}>
                 
-                <Block style={styles.subTitle} marginTop="40%">
+                <Block style={styles.subTitle} marginTop="20%">
                   <Text color="white" size={16}>
                                 Track your spending YOUR way.
                   </Text>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0
   },
   logo: {
-    width: 200,
+    width: 500,
     height: 60,
     zIndex: 2,
     position: 'relative',

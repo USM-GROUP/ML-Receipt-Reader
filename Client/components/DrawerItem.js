@@ -13,7 +13,7 @@ class DrawerItem extends React.Component {
       case "Home":
         return (
           <Icon
-            name="shop"
+            name="home3"
             family="ArgonExtra"
             size={14}
             color={focused ? "white" : argonTheme.COLORS.PRIMARY}
@@ -22,7 +22,7 @@ class DrawerItem extends React.Component {
       case "Receipts":
         return (
           <Icon
-            name="ic_receipt_48px"
+            name="file-text"
             family="ArgonExtra"
             size={14}
             color={focused ? "white" : argonTheme.COLORS.PRIMARY}
@@ -31,7 +31,7 @@ class DrawerItem extends React.Component {
       case "Profile":
         return (
           <Icon
-            name="ic_portrait_48px"
+            name="user"
             family="ArgonExtra"
             size={14}
             color={focused ? "white" : argonTheme.COLORS.PRIMARY}
@@ -40,7 +40,7 @@ class DrawerItem extends React.Component {
       case "Account":
         return (
           <Icon
-            name="hat-3"
+            name="user-plus"
             family="ArgonExtra"
             size={14}
             color={focused ? "white" : argonTheme.COLORS.PRIMARY}

@@ -1,10 +1,10 @@
 // local imgs
 const Onboarding = require("../assets/imgs/bg.jpg");
-const Logo = require("../assets/imgs/SH_Logo.png");
-const LogoOnboarding = require("../assets/imgs/SH_Logo_white.png");
+const Logo = require("../assets/imgs/RE_Logo_blk.png");
+const LogoOnboarding = require("../assets/imgs/RE_Logo_wht.png");
 const ProfileBackground = require("../assets/imgs/signin_bg.png");
 const RegisterBackground = require("../assets/imgs/signin_bg.png");
-const ArgonLogo = require("../assets/imgs/SH_Logo.png");
+const ArgonLogo = require("../assets/imgs/RE_Logo_blk.png");
 const iOSLogo = require("../assets/imgs/ios.png");
 const androidLogo = require("../assets/imgs/android.png");
 const receipt1 = require("../assets/imgs/Receipt1.jpg");
@@ -18,11 +18,11 @@ const receipt5 = require("../assets/imgs/receipt5.jpg");
 const ProfilePicture = 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?fit=crop&w=1650&q=80';
 
 const Viewed = [
-  '../assets/imgs/Receipt1.jpg',
-  '../assets/imgs/Receipt2.jpeg',
-  '../assets/imgs/Receipt3.jpg',
-  '../assets/imgs/Receipt4.jpg',
-  '../assets/imgs/Receipt5.jpg',
+  'https://i.pinimg.com/236x/2f/a3/37/2fa33777d3b77fc75eb073d228097935.jpg',
+  'https://i.pinimg.com/236x/27/14/b1/2714b1a7d1b3ef2bb0d73b2567ca304d--cupcake-baby-showers-baby-shower-gifts.jpg',
+  'https://images.sampletemplates.com/wp-content/uploads/2018/04/Printable-Gorcery-Payment-Reciept-Sample.jpg',
+  'https://needreceipt.com/impImages/pharmacyDefault.png',
+  'https://needreceipt.com/groceryVar2Default.png',
 ];
 
 const Statistics = {
