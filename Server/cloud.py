@@ -60,6 +60,7 @@ def findItem(lines):
     items = []
     for l in lines:
         if re.search("[0-9]+[.][0-9]{2}.*", l):
+            print(l)
             items.append(l)
     return items
 
@@ -78,10 +79,21 @@ def processImage(imagePath, filename):
     with io.open('./responses/response_' + filename +'.txt','w') as out:
         print(response, file=out)
         print("Receieved")
+        out.close()
 
     lines = lineDetection(labels)
     items = findItem(lines)
     removeKeywords(items)
+    
+    print("[START] ==== DETECTED WORDS:")
+    for l in lines:
+        print(l)
+    print("[END] ==== DETECTED WORDS:")
 
     with io.open('./responses/items_' + filename +'.txt','w') as out:
-        print(items, file=out)
+        print("[START] ==== DETECTED ITEMS:")
+        for item in items:
+            print(item, file=out)
+            print(item)
+        print("[END] ==== DETECTED ITEMS:")
+        out.close()
