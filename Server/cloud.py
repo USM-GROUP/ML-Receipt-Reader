@@ -36,7 +36,7 @@ def lineDetection(labels):
     #print(heights)
     median = heights[int(len(heights)/2)]
     #print(median)
-    size = int(height/median) +1
+    size = int(height/median)+1
     lines = []
     for i in range(0,size):
         lines.append([])
@@ -84,4 +84,4 @@ def processImage(imagePath, filename):
     removeKeywords(items)
 
     with io.open('./responses/items_' + filename +'.txt','w') as out:
-        print(items)
+        print(items, file=out)
